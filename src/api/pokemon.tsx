@@ -25,7 +25,10 @@ const parsePokemonData = (data: any): IPokemon => {
     abilities: data.pokemon_v2_pokemonabilities.map((ability: any) => ({
       slot: ability.slot,
       isHidden: ability.is_hidden,
-      ability: ability.pokemon_v2_ability,
+      ability: {
+        id: ability.pokemon_v2_ability.id,
+        name: ability.pokemon_v2_ability.name.replace("-", " "),
+      },
     })),
     color: typeColors[data.pokemon_v2_pokemontypes[0].pokemon_v2_type.name],
   };

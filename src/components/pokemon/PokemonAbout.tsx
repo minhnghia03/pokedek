@@ -60,7 +60,9 @@ const PokemonAbout = ({ pokemon }: Props) => {
         <div className="flex flex-col items-center gap-2 justify-end">
           <div>
             {pokemon.abilities.map((ability) => (
-              <h1 key={ability.slot}>{ability.ability.name}</h1>
+              <h1 key={ability.slot} className="capitalize">
+                {ability.ability.name}
+              </h1>
             ))}
           </div>
           <h1 className="text-sm text-mediumGray">Abilities</h1>
