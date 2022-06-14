@@ -9,9 +9,10 @@ import PokemonImage from "../../src/components/pokemon/PokemonImage";
 import PokemonStat from "../../src/components/pokemon/PokemonStat";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import Link from "next/link";
+import Spinner from "../../src/components/spinner/Spinner";
 
 type Props = {
-  pokemon: IPokemon | null;
+  pokemon: IPokemon;
   prevPokemon: IPokemon | null;
   nextPokemon: IPokemon | null;
 };
@@ -25,18 +26,10 @@ const PokemonDetailPage = ({ pokemon, prevPokemon, nextPokemon }: Props) => {
         <Head>
           <title>Loading</title>
         </Head>
-        <div>Loading...</div>
-      </>
-    );
-  }
-
-  if (pokemon === null) {
-    return (
-      <>
-        <Head>
-          <title>Invalid Pokemon ID</title>
-        </Head>
-        <div>Invalid Pokemon ID</div>
+        <div className="flex flex-col items-center py-8 gap-2">
+          <Spinner />
+          <h1>Loading...</h1>
+        </div>
       </>
     );
   }
@@ -47,7 +40,7 @@ const PokemonDetailPage = ({ pokemon, prevPokemon, nextPokemon }: Props) => {
         <title>{pokemon.name}</title>
       </Head>
       <div className="flex flex-col gap-4 py-4">
-        <div className="text-center relative">
+        <div className="relative">
           {prevPokemon !== null && (
             <Link href={`/pokemon/${prevPokemon.id}`} passHref>
               <a className="text-lg flex h-full items-center text-mediumGray hover:text-blue-500 cursor-pointer absolute top-0 left-0">
@@ -59,13 +52,6 @@ const PokemonDetailPage = ({ pokemon, prevPokemon, nextPokemon }: Props) => {
               </a>
             </Link>
           )}
-
-          <h1 className="text-4xl font-bold capitalize">
-            {pokemon.name}{" "}
-            <span className="font-normal text-mediumGray">
-              #{pokemon.id.toString().padStart(3, "0")}
-            </span>
-          </h1>
 
           {nextPokemon !== null && (
             <Link href={`/pokemon/${nextPokemon.id}`} passHref>
@@ -79,6 +65,13 @@ const PokemonDetailPage = ({ pokemon, prevPokemon, nextPokemon }: Props) => {
             </Link>
           )}
         </div>
+
+        <h1 className="text-4xl font-bold capitalize w-full text-center">
+          {pokemon.name}{" "}
+          <span className="font-normal text-mediumGray">
+            #{pokemon.id.toString().padStart(3, "0")}
+          </span>
+        </h1>
 
         <div className="flex flex-col sm:flex-row w-full gap-12">
           <div className="w-full sm:w-[45%] shrink-0">
@@ -110,6 +103,13 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { id } = params as MyParams;
 
   const pokemon = await fetchSinglePokemon(Number(id));
+
+  if (pokemon === null) {
+    return {
+      notFound: true,
+    };
+  }
+
   const nextPokemon = await fetchSinglePokemon(Number(id) + 1);
   const prevPokemon = await fetchSinglePokemon(Number(id) - 1);
 
