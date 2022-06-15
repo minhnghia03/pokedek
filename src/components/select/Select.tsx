@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
+import useClickOutside from "../../utils/useClickOutside";
 
 type SelectProps = {
   defaultValue: string;
@@ -17,7 +18,14 @@ export const Select = ({
   onValueChange,
 }: SelectProps) => {
   const [value, setValue] = useState(defaultValue);
+
   const [show, setShow] = useState(false);
+
+  const ref = useRef<HTMLDivElement>(null);
+
+  useClickOutside(ref, () => {
+    setShow(false);
+  });
 
   const chose = (value: string) => {
     setValue(value);
@@ -28,6 +36,7 @@ export const Select = ({
 
   return (
     <div
+      ref={ref}
       className={`relative w-40 cursor-pointer rounded-md px-4 py-2 border ${
         show ? "border-blue-500" : "border-slate-500"
       } bg-white`}

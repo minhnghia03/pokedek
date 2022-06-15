@@ -110,16 +110,18 @@ export const fetchPokemons = async ({
   page,
   term,
   sort,
+  order,
 }: {
   page: number;
   term: string;
   sort: string;
+  order: string;
 }): Promise<IPokemon[]> => {
   const query = `
     query MyQuery {
       pokemon_v2_pokemon(limit: ${POKEMONS_PER_PAGE}, offset: ${
     page * POKEMONS_PER_PAGE
-  }, where: {name: {_regex: "^${term.toLowerCase()}"}, id: {_lt: 1000}}, order_by: {${sort}: asc}) {
+  }, where: {name: {_regex: "^${term.toLowerCase()}"}, id: {_lt: 1000}}, order_by: {${sort}: ${order}}) {
         id
         height
         weight

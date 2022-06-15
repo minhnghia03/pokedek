@@ -35,7 +35,7 @@ const PokemonImage = ({ pokemon }: Props) => {
           </g>
         </svg>
       </div>
-      <div className="w-[90%] aspect-square mt-16  relative">
+      <div className="w-[90%] aspect-square mt-16 relative">
         <Image
           src={pokemon.sprite}
           alt={pokemon.name}
