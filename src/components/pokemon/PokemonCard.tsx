@@ -2,13 +2,13 @@ import React from "react";
 import { IPokemon } from "../../types/pokemon";
 import { typeColors } from "../../api/pokemon";
 import Link from "next/link";
+import Image from "next/image";
 
 type Props = {
   pokemon: IPokemon;
 };
 
 const PokemonCard = ({ pokemon }: Props) => {
-
   return (
     <Link href={`/pokemon/${pokemon.id}`} passHref>
       <a
@@ -23,7 +23,14 @@ const PokemonCard = ({ pokemon }: Props) => {
         >
           #{pokemon.id.toString().padStart(3, "0")}
         </h1>
-        <img src={pokemon.sprite} alt={pokemon.name} />
+        <div className="w-full aspect-square relative">
+          <Image
+            src={pokemon.sprite}
+            alt={pokemon.name}
+            layout="fill"
+            objectFit="contain"
+          />
+        </div>
         <div
           style={{ backgroundColor: pokemon.color }}
           className="flex flex-col items-center py-2"
