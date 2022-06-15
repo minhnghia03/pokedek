@@ -23,9 +23,16 @@ const PokemonStat = ({ pokemon }: Props) => {
             </td>
             <td className="pr-4">{baseStat}</td>
             <td className="w-full">
-              <div className="rounded-full h-3 w-full">
+              <div className="rounded-full h-3 w-full relative">
                 <div
-                  className="rounded-full h-full"
+                  className="rounded-full h-full w-full absolute left-0 top-0"
+                  style={{
+                    backgroundColor: pokemon.color,
+                    opacity: "25%",
+                  }}
+                ></div>
+                <div
+                  className="rounded-full h-full absolute left-0 top-0"
                   style={{
                     backgroundColor: pokemon.color,
                     width: `${(baseStat / 255) * 100}%`,
