@@ -52,6 +52,7 @@ const Home = () => {
   const toggleOrder = () => {
     setFilter({
       ...filter,
+      page: 0,
       order: filter.order === "asc" ? "desc" : "asc",
     });
   };
