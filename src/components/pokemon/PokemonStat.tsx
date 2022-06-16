@@ -1,6 +1,5 @@
 import { IPokemon } from "../../types/pokemon";
 import { statAcronym } from "../../api/pokemon";
-import { LightenDarkenColor } from "../../utils/color";
 
 type Props = {
   pokemon: IPokemon;
