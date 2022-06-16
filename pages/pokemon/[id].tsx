@@ -10,6 +10,7 @@ import PokemonStat from "../../src/components/pokemon/PokemonStat";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import Link from "next/link";
 import Spinner from "../../src/components/spinner/Spinner";
+import TypeChart from "../../src/components/pokemon/TypeChart";
 
 type Props = {
   pokemon: IPokemon;
@@ -67,7 +68,7 @@ const PokemonDetailPage = ({ pokemon, prevPokemon, nextPokemon }: Props) => {
         </div>
 
         <h1 className="text-4xl font-bold capitalize w-full text-center">
-          {pokemon.name} {" "}
+          {pokemon.name}{" "}
           <span className="font-normal text-mediumGray">
             #{pokemon.id.toString().padStart(3, "0")}
           </span>
@@ -83,6 +84,7 @@ const PokemonDetailPage = ({ pokemon, prevPokemon, nextPokemon }: Props) => {
             <PokemonStat pokemon={pokemon} />
           </div>
         </div>
+        <TypeChart pokemon={pokemon} />
       </div>
     </>
   );
