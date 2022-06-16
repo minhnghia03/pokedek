@@ -16,6 +16,10 @@ html {
   font-size: 14px;
 }
 
+a {
+  cursor: pointer;
+}
+
 @screen sm {
   html {
     font-size: 16px;

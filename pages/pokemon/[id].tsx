@@ -43,7 +43,7 @@ const PokemonDetailPage = ({ pokemon, prevPokemon, nextPokemon }: Props) => {
         <div className="relative">
           {prevPokemon !== null && (
             <Link href={`/pokemon/${prevPokemon.id}`} passHref>
-              <a className="text-lg flex h-full items-center text-mediumGray hover:text-blue-500 cursor-pointer absolute top-0 left-0">
+              <a className="text-lg flex h-full items-center text-mediumGray hover:text-blue-500 absolute top-0 left-0">
                 <BsChevronLeft />
                 <h1 className="capitalize">
                   {prevPokemon.name} #
@@ -55,7 +55,7 @@ const PokemonDetailPage = ({ pokemon, prevPokemon, nextPokemon }: Props) => {
 
           {nextPokemon !== null && (
             <Link href={`/pokemon/${nextPokemon.id}`} passHref>
-              <a className="text-lg h-full flex items-center text-mediumGray hover:text-blue-500 cursor-pointer absolute top-0 right-0">
+              <a className="text-lg h-full flex items-center text-mediumGray hover:text-blue-500 absolute top-0 right-0">
                 <h1 className="capitalize">
                   {nextPokemon.name} #
                   {nextPokemon.id.toString().padStart(3, "0")}
@@ -67,7 +67,7 @@ const PokemonDetailPage = ({ pokemon, prevPokemon, nextPokemon }: Props) => {
         </div>
 
         <h1 className="text-4xl font-bold capitalize w-full text-center">
-          {pokemon.name}{" "}
+          {pokemon.name} {" "}
           <span className="font-normal text-mediumGray">
             #{pokemon.id.toString().padStart(3, "0")}
           </span>

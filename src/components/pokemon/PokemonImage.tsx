@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { typeColors } from "../../api/pokemon";
 import { IPokemon } from "../../types/pokemon";
+import Link from "next/link";
+
 type Props = {
   pokemon: IPokemon;
 };
@@ -8,11 +10,11 @@ type Props = {
 const PokemonImage = ({ pokemon }: Props) => {
   return (
     <div
-      className="w-full flex flex-col items-center relative overflow-auto rounded-md bg-white shadow-md pb-4 border-2 -z-20"
+      className="w-full flex flex-col items-center relative rounded-md bg-white shadow-md pb-4 border-2"
       style={{ borderColor: pokemon.color }}
     >
       <div
-        className="absolute w-full h-4/6 p-2 flex justify-end -z-10"
+        className="absolute w-full h-4/6 p-2 flex justify-end -z-1"
         style={{ backgroundColor: pokemon.color }}
       >
         <svg
@@ -45,13 +47,19 @@ const PokemonImage = ({ pokemon }: Props) => {
       </div>
       <div className="flex gap-4">
         {pokemon.types.map((type) => (
-          <div
-            key={type.slot}
-            style={{ backgroundColor: typeColors[type.type.name] }}
-            className="text-white rounded-full px-4 py-1 font-medium"
-          >
-            {type.type.name}
-          </div>
+          <Link key={type.slot} href={`/type/${type.type.name}`} passHref>
+            <a
+              style={{ backgroundColor: typeColors[type.type.name] }}
+              className="flex gap-1 items-center text-white rounded-full px-4 py-2 font-medium"
+            >
+              <img
+                src={`/type-icons/${type.type.name}.svg`}
+                alt={type.type.name}
+                className="w-4"
+              />
+              <h1 className="uppercase">{type.type.name}</h1>
+            </a>
+          </Link>
         ))}
       </div>
     </div>

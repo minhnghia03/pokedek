@@ -29,6 +29,7 @@ const PokemonCard = ({ pokemon }: Props) => {
             alt={pokemon.name}
             layout="fill"
             objectFit="contain"
+            priority={true}
           />
         </div>
         <div
