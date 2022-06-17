@@ -2,12 +2,12 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { ParsedUrlQuery } from 'querystring';
+import { fetchSinglePokemon } from '../../src/api/pokemon';
 import {
-  fetchSinglePokemon,
   typeColors,
   allTypes,
   calculateEffectiveness
-} from '../../src/api/pokemon';
+} from '../../src/api/pokemon_type';
 import PokemonAbout from '../../src/components/pokemon/PokemonAbout';
 import { IPokemon } from '../../src/types/pokemon';
 import PokemonImage from '../../src/components/pokemon/PokemonImage';

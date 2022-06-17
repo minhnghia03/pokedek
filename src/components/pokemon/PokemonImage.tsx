@@ -1,7 +1,8 @@
 import Image from 'next/image';
-import { typeColors } from '../../api/pokemon';
+import { typeColors } from '../../api/pokemon_type';
 import { IPokemon } from '../../types/pokemon';
 import Link from 'next/link';
+import TypeButton from './TypeButton';
 
 type Props = {
   pokemon: IPokemon;
@@ -47,19 +48,7 @@ const PokemonImage = ({ pokemon }: Props) => {
       </div>
       <div className="flex gap-4">
         {pokemon.types.map((type) => (
-          <Link key={type.slot} href={`/type/${type.type.name}`} passHref>
-            <a
-              style={{ backgroundColor: typeColors[type.type.name] }}
-              className="flex gap-1 items-center text-white rounded-full px-4 py-2 font-medium"
-            >
-              <img
-                src={`/type-icons/${type.type.name}.svg`}
-                alt={type.type.name}
-                className="w-4"
-              />
-              <h1 className="uppercase">{type.type.name}</h1>
-            </a>
-          </Link>
+          <TypeButton key={type.slot} type={type.type.name} />
         ))}
       </div>
     </div>

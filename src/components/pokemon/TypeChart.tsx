@@ -1,6 +1,6 @@
 import React from 'react';
 import { IPokemon } from '../../types/pokemon';
-import { typeColors, allTypes } from '../../api/pokemon';
+import { typeColors } from '../../api/pokemon_type';
 import Link from 'next/link';
 
 type Props = {
