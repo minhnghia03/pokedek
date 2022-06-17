@@ -1,7 +1,7 @@
-import { GetStaticPaths, GetStaticProps } from "next";
-import fs from "fs";
-import { ParsedUrlQuery } from "querystring";
-import { typeColors } from "../../src/api/pokemon";
+import { GetStaticPaths, GetStaticProps } from 'next';
+import fs from 'fs';
+import { ParsedUrlQuery } from 'querystring';
+import { typeColors } from '../../src/api/pokemon';
 
 type Props = {
   slug: string;
@@ -25,16 +25,16 @@ const TypeDetailPage = ({ slug, description }: Props) => {
 export default TypeDetailPage;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const data = fs.readFileSync("data/types.json", "utf-8");
+  const data = fs.readFileSync('data/types.json', 'utf-8');
   const types = JSON.parse(data);
 
   return {
     paths: Object.keys(types).map((key) => ({
       params: {
-        slug: key,
-      },
+        slug: key
+      }
     })),
-    fallback: false,
+    fallback: false
   };
 };
 
@@ -43,7 +43,7 @@ type MyQuery = ParsedUrlQuery & {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const data = fs.readFileSync("data/types.json", "utf-8");
+  const data = fs.readFileSync('data/types.json', 'utf-8');
   const types = JSON.parse(data);
   const { slug } = params as MyQuery;
 
@@ -52,7 +52,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   return {
     props: {
       slug,
-      description,
-    },
+      description
+    }
   };
 };

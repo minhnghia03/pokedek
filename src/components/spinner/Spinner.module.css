@@ -5,12 +5,12 @@
 }
 
 .main {
-  stroke: theme("colors.blue.500");
+  stroke: theme('colors.blue.500');
   animation: dash 1.5s ease-in-out infinite;
 }
 
 .second {
-  stroke: theme("colors.blue.500");
+  stroke: theme('colors.blue.500');
   opacity: 40%;
 }
 

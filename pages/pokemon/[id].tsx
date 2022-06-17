@@ -1,24 +1,35 @@
-import { GetStaticPaths, GetStaticProps } from "next";
-import Head from "next/head";
-import { useRouter } from "next/router";
-import { ParsedUrlQuery } from "querystring";
-import { fetchSinglePokemon, typeColors } from "../../src/api/pokemon";
-import PokemonAbout from "../../src/components/pokemon/PokemonAbout";
-import { IPokemon } from "../../src/types/pokemon";
-import PokemonImage from "../../src/components/pokemon/PokemonImage";
-import PokemonStat from "../../src/components/pokemon/PokemonStat";
-import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
-import Link from "next/link";
-import Spinner from "../../src/components/spinner/Spinner";
-import TypeChart from "../../src/components/pokemon/TypeChart";
+import { GetStaticPaths, GetStaticProps } from 'next';
+import Head from 'next/head';
+import { useRouter } from 'next/router';
+import { ParsedUrlQuery } from 'querystring';
+import {
+  fetchSinglePokemon,
+  typeColors,
+  allTypes,
+  calculateEffectiveness
+} from '../../src/api/pokemon';
+import PokemonAbout from '../../src/components/pokemon/PokemonAbout';
+import { IPokemon } from '../../src/types/pokemon';
+import PokemonImage from '../../src/components/pokemon/PokemonImage';
+import PokemonStat from '../../src/components/pokemon/PokemonStat';
+import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
+import Link from 'next/link';
+import Spinner from '../../src/components/spinner/Spinner';
+import TypeChart from '../../src/components/pokemon/TypeChart';
 
 type Props = {
   pokemon: IPokemon;
   prevPokemon: IPokemon | null;
   nextPokemon: IPokemon | null;
+  typeEff: { [key: string]: number };
 };
 
-const PokemonDetailPage = ({ pokemon, prevPokemon, nextPokemon }: Props) => {
+const PokemonDetailPage = ({
+  pokemon,
+  prevPokemon,
+  nextPokemon,
+  typeEff
+}: Props) => {
   const router = useRouter();
 
   if (router.isFallback) {
@@ -48,7 +59,7 @@ const PokemonDetailPage = ({ pokemon, prevPokemon, nextPokemon }: Props) => {
                 <BsChevronLeft />
                 <h1 className="capitalize">
                   {prevPokemon.name} #
-                  {prevPokemon.id.toString().padStart(3, "0")}
+                  {prevPokemon.id.toString().padStart(3, '0')}
                 </h1>
               </a>
             </Link>
@@ -59,7 +70,7 @@ const PokemonDetailPage = ({ pokemon, prevPokemon, nextPokemon }: Props) => {
               <a className="text-lg h-full flex items-center text-mediumGray hover:text-blue-500 absolute top-0 right-0">
                 <h1 className="capitalize">
                   {nextPokemon.name} #
-                  {nextPokemon.id.toString().padStart(3, "0")}
+                  {nextPokemon.id.toString().padStart(3, '0')}
                 </h1>
                 <BsChevronRight />
               </a>
@@ -68,9 +79,9 @@ const PokemonDetailPage = ({ pokemon, prevPokemon, nextPokemon }: Props) => {
         </div>
 
         <h1 className="text-4xl font-bold capitalize w-full text-center">
-          {pokemon.name}{" "}
+          {pokemon.name}{' '}
           <span className="font-normal text-mediumGray">
-            #{pokemon.id.toString().padStart(3, "0")}
+            #{pokemon.id.toString().padStart(3, '0')}
           </span>
         </h1>
 
@@ -84,7 +95,7 @@ const PokemonDetailPage = ({ pokemon, prevPokemon, nextPokemon }: Props) => {
             <PokemonStat pokemon={pokemon} />
           </div>
         </div>
-        <TypeChart pokemon={pokemon} />
+        <TypeChart pokemon={pokemon} typeEff={typeEff} />
       </div>
     </>
   );
@@ -93,7 +104,7 @@ const PokemonDetailPage = ({ pokemon, prevPokemon, nextPokemon }: Props) => {
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
     paths: [],
-    fallback: true,
+    fallback: true
   };
 };
 
@@ -108,9 +119,20 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   if (pokemon === null) {
     return {
-      notFound: true,
+      notFound: true
     };
   }
+
+  const typeEff: {
+    [key: string]: number;
+  } = {};
+
+  allTypes.forEach((type) => {
+    typeEff[type] = calculateEffectiveness(
+      type,
+      pokemon.types.map((type) => type.type.name)
+    );
+  });
 
   const nextPokemon = await fetchSinglePokemon(Number(id) + 1);
   const prevPokemon = await fetchSinglePokemon(Number(id) - 1);
@@ -120,7 +142,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       pokemon,
       nextPokemon,
       prevPokemon,
-    },
+      typeEff
+    }
   };
 };
 

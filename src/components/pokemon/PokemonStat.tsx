@@ -1,5 +1,5 @@
-import { IPokemon } from "../../types/pokemon";
-import { statAcronym } from "../../api/pokemon";
+import { IPokemon } from '../../types/pokemon';
+import { statAcronym } from '../../api/pokemon';
 
 type Props = {
   pokemon: IPokemon;
@@ -28,14 +28,14 @@ const PokemonStat = ({ pokemon }: Props) => {
                     className="rounded-full h-full w-full absolute left-0 top-0"
                     style={{
                       backgroundColor: pokemon.color,
-                      opacity: "25%",
+                      opacity: '25%'
                     }}
                   ></div>
                   <div
                     className="rounded-full h-full absolute left-0 top-0"
                     style={{
                       backgroundColor: pokemon.color,
-                      width: `${(baseStat / 255) * 100}%`,
+                      width: `${(baseStat / 255) * 100}%`
                     }}
                   ></div>
                 </div>

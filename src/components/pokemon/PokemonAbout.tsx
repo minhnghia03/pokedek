@@ -1,5 +1,5 @@
-import React from "react";
-import { IPokemon } from "../../types/pokemon";
+import React from 'react';
+import { IPokemon } from '../../types/pokemon';
 
 type Props = {
   pokemon: IPokemon;

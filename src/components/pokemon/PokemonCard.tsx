@@ -1,8 +1,8 @@
-import React from "react";
-import { IPokemon } from "../../types/pokemon";
-import { typeColors } from "../../api/pokemon";
-import Link from "next/link";
-import Image from "next/image";
+import React from 'react';
+import { IPokemon } from '../../types/pokemon';
+import { typeColors } from '../../api/pokemon';
+import Link from 'next/link';
+import Image from 'next/image';
 
 type Props = {
   pokemon: IPokemon;
@@ -14,14 +14,14 @@ const PokemonCard = ({ pokemon }: Props) => {
       <a
         className="rounded-md bg-white shadow-md overflow-hidden border-2 hover:scale-105 cursor-pointer"
         style={{
-          borderColor: pokemon.color,
+          borderColor: pokemon.color
         }}
       >
         <h1
           className="w-full text-right pr-2 pt-1"
           style={{ color: pokemon.color }}
         >
-          #{pokemon.id.toString().padStart(3, "0")}
+          #{pokemon.id.toString().padStart(3, '0')}
         </h1>
         <div className="w-full aspect-square relative">
           <Image

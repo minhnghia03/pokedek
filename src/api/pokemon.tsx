@@ -1,22 +1,22 @@
-import axios from "axios";
-import type { IPokemon } from "../types/pokemon";
+import axios from 'axios';
+import type { IPokemon } from '../types/pokemon';
 
 const parsePokemonData = (data: any): IPokemon => {
   return {
     id: data.id,
-    name: data.pokemon_v2_pokemonspecy.name.replace("-", " "),
+    name: data.pokemon_v2_pokemonspecy.name.replace('-', ' '),
     height: data.height / 10,
     weight: data.weight / 10,
     types: data.pokemon_v2_pokemontypes.map((type: any) => ({
       slot: type.slot,
-      type: type.pokemon_v2_type,
+      type: type.pokemon_v2_type
     })),
     stats: data.pokemon_v2_pokemonstats.map((stat: any) => ({
       baseStat: stat.base_stat,
       stat: {
-        name: stat.pokemon_v2_stat.name.replace("-", " "),
-        id: stat.pokemon_v2_stat.id,
-      },
+        name: stat.pokemon_v2_stat.name.replace('-', ' '),
+        id: stat.pokemon_v2_stat.id
+      }
     })),
     sprite: `/pokemons/${data.id}.png`,
     description:
@@ -27,10 +27,10 @@ const parsePokemonData = (data: any): IPokemon => {
       isHidden: ability.is_hidden,
       ability: {
         id: ability.pokemon_v2_ability.id,
-        name: ability.pokemon_v2_ability.name.replace("-", " "),
-      },
+        name: ability.pokemon_v2_ability.name.replace('-', ' ')
+      }
     })),
-    color: typeColors[data.pokemon_v2_pokemontypes[0].pokemon_v2_type.name],
+    color: typeColors[data.pokemon_v2_pokemontypes[0].pokemon_v2_type.name]
   };
 };
 
@@ -42,11 +42,11 @@ const fetchPokemonGraphQL = async (
   operationName: string
 ) => {
   const {
-    data: { data },
-  } = await axios.post("https://beta.pokeapi.co/graphql/v1beta", {
+    data: { data }
+  } = await axios.post('https://beta.pokeapi.co/graphql/v1beta', {
     query,
     variables,
-    operationName,
+    operationName
   });
 
   return data;
@@ -96,7 +96,7 @@ export const fetchSinglePokemon = async (
   const { pokemon_v2_pokemon } = await fetchPokemonGraphQL(
     query,
     null,
-    "MyQuery"
+    'MyQuery'
   );
 
   if (pokemon_v2_pokemon.length) {
@@ -110,7 +110,7 @@ export const fetchPokemons = async ({
   page,
   term,
   sort,
-  order,
+  order
 }: {
   page: number;
   term: string;
@@ -159,7 +159,7 @@ export const fetchPokemons = async ({
   const { pokemon_v2_pokemon } = await fetchPokemonGraphQL(
     query,
     null,
-    "MyQuery"
+    'MyQuery'
   );
 
   return pokemon_v2_pokemon.map((pokemon: any) => parsePokemonData(pokemon));
@@ -168,45 +168,45 @@ export const fetchPokemons = async ({
 export const typeColors: {
   [key: string]: string;
 } = {
-  normal: "#A8A77A",
-  fire: "#EE8130",
-  water: "#6390F0",
-  electric: "#F7D02C",
-  grass: "#7AC74C",
-  ice: "#96D9D6",
-  fighting: "#C22E28",
-  poison: "#A33EA1",
-  ground: "#E2BF65",
-  flying: "#A98FF3",
-  psychic: "#F95587",
-  bug: "#A6B91A",
-  rock: "#B6A136",
-  ghost: "#735797",
-  dragon: "#6F35FC",
-  dark: "#705746",
-  steel: "#B7B7CE",
-  fairy: "#D685AD",
+  normal: '#A8A77A',
+  fire: '#EE8130',
+  water: '#6390F0',
+  electric: '#F7D02C',
+  grass: '#7AC74C',
+  ice: '#96D9D6',
+  fighting: '#C22E28',
+  poison: '#A33EA1',
+  ground: '#E2BF65',
+  flying: '#A98FF3',
+  psychic: '#F95587',
+  bug: '#A6B91A',
+  rock: '#B6A136',
+  ghost: '#735797',
+  dragon: '#6F35FC',
+  dark: '#705746',
+  steel: '#B7B7CE',
+  fairy: '#D685AD'
 };
 
 export const allTypes = [
-  "normal",
-  "fighting",
-  "flying",
-  "poison",
-  "ground",
-  "rock",
-  "bug",
-  "ghost",
-  "steel",
-  "fire",
-  "water",
-  "grass",
-  "electric",
-  "psychic",
-  "ice",
-  "dragon",
-  "dark",
-  "fairy",
+  'normal',
+  'fighting',
+  'flying',
+  'poison',
+  'ground',
+  'rock',
+  'bug',
+  'ghost',
+  'steel',
+  'fire',
+  'water',
+  'grass',
+  'electric',
+  'psychic',
+  'ice',
+  'dragon',
+  'dark',
+  'fairy'
 ];
 
 export const typeEffectiveness: {
@@ -232,7 +232,7 @@ export const typeEffectiveness: {
     ice: 1,
     dragon: 1,
     dark: 1,
-    fairy: 1,
+    fairy: 1
   },
   fighting: {
     normal: 2,
@@ -252,7 +252,7 @@ export const typeEffectiveness: {
     ice: 2,
     dragon: 1,
     dark: 2,
-    fairy: 0.5,
+    fairy: 0.5
   },
   flying: {
     normal: 1,
@@ -272,7 +272,7 @@ export const typeEffectiveness: {
     ice: 1,
     dragon: 1,
     dark: 1,
-    fairy: 1,
+    fairy: 1
   },
   poison: {
     normal: 1,
@@ -292,7 +292,7 @@ export const typeEffectiveness: {
     ice: 1,
     dragon: 1,
     dark: 1,
-    fairy: 2,
+    fairy: 2
   },
   ground: {
     normal: 1,
@@ -312,7 +312,7 @@ export const typeEffectiveness: {
     ice: 1,
     dragon: 1,
     dark: 1,
-    fairy: 1,
+    fairy: 1
   },
   rock: {
     normal: 1,
@@ -332,7 +332,7 @@ export const typeEffectiveness: {
     ice: 2,
     dragon: 1,
     dark: 1,
-    fairy: 1,
+    fairy: 1
   },
   bug: {
     normal: 1,
@@ -352,7 +352,7 @@ export const typeEffectiveness: {
     ice: 1,
     dragon: 1,
     dark: 2,
-    fairy: 0.5,
+    fairy: 0.5
   },
   ghost: {
     normal: 0,
@@ -372,7 +372,7 @@ export const typeEffectiveness: {
     ice: 1,
     dragon: 1,
     dark: 0.5,
-    fairy: 1,
+    fairy: 1
   },
   steel: {
     normal: 1,
@@ -392,7 +392,7 @@ export const typeEffectiveness: {
     ice: 2,
     dragon: 1,
     dark: 1,
-    fairy: 2,
+    fairy: 2
   },
   fire: {
     normal: 1,
@@ -412,7 +412,7 @@ export const typeEffectiveness: {
     ice: 2,
     dragon: 0.5,
     dark: 1,
-    fairy: 1,
+    fairy: 1
   },
   water: {
     normal: 1,
@@ -432,7 +432,7 @@ export const typeEffectiveness: {
     ice: 1,
     dragon: 0.5,
     dark: 1,
-    fairy: 1,
+    fairy: 1
   },
   grass: {
     normal: 1,
@@ -452,7 +452,7 @@ export const typeEffectiveness: {
     ice: 1,
     dragon: 0.5,
     dark: 1,
-    fairy: 1,
+    fairy: 1
   },
   electric: {
     normal: 1,
@@ -472,7 +472,7 @@ export const typeEffectiveness: {
     ice: 1,
     dragon: 0.5,
     dark: 1,
-    fairy: 1,
+    fairy: 1
   },
   psychic: {
     normal: 1,
@@ -492,7 +492,7 @@ export const typeEffectiveness: {
     ice: 1,
     dragon: 1,
     dark: 0,
-    fairy: 1,
+    fairy: 1
   },
   ice: {
     normal: 1,
@@ -512,7 +512,7 @@ export const typeEffectiveness: {
     ice: 0.5,
     dragon: 2,
     dark: 1,
-    fairy: 1,
+    fairy: 1
   },
   dragon: {
     normal: 1,
@@ -532,7 +532,7 @@ export const typeEffectiveness: {
     ice: 1,
     dragon: 2,
     dark: 1,
-    fairy: 0,
+    fairy: 0
   },
   dark: {
     normal: 1,
@@ -552,7 +552,7 @@ export const typeEffectiveness: {
     ice: 1,
     dragon: 1,
     dark: 0.5,
-    fairy: 0.5,
+    fairy: 0.5
   },
   fairy: {
     normal: 1,
@@ -572,8 +572,8 @@ export const typeEffectiveness: {
     ice: 1,
     dragon: 2,
     dark: 2,
-    fairy: 1,
-  },
+    fairy: 1
+  }
 };
 
 export const calculateEffectiveness = (
@@ -587,10 +587,10 @@ export const calculateEffectiveness = (
 };
 
 export const statAcronym: { [key: string]: string } = {
-  attack: "atk",
-  hp: "hp",
-  defense: "def",
-  speed: "spd",
-  "special attack": "satk",
-  "special defense": "sdef",
+  attack: 'atk',
+  hp: 'hp',
+  defense: 'def',
+  speed: 'spd',
+  'special attack': 'satk',
+  'special defense': 'sdef'
 };

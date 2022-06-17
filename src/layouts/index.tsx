@@ -1,5 +1,5 @@
-import Navbar from "../components/Navbar";
-import Head from "next/head";
+import Navbar from '../components/Navbar';
+import Head from 'next/head';
 
 type Props = {
   children: React.ReactNode;

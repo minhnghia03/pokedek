@@ -1,7 +1,7 @@
-import Image from "next/image";
-import { typeColors } from "../../api/pokemon";
-import { IPokemon } from "../../types/pokemon";
-import Link from "next/link";
+import Image from 'next/image';
+import { typeColors } from '../../api/pokemon';
+import { IPokemon } from '../../types/pokemon';
+import Link from 'next/link';
 
 type Props = {
   pokemon: IPokemon;
