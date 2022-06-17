@@ -1,5 +1,6 @@
 import React from 'react';
 import { IPokemon } from '../../types/pokemon';
+import styles from '../../../styles/PokemonDetail.module.css';
 
 type Props = {
   pokemon: IPokemon;
@@ -7,12 +8,12 @@ type Props = {
 
 const PokemonAbout = ({ pokemon }: Props) => {
   return (
-    <div className="flex flex-col items-center gap-4">
-      <h1 className="font-semibold" style={{ color: pokemon.color }}>
+    <div className="flex flex-col items-center gap-2">
+      <h1 className={styles.title} style={{ color: pokemon.color }}>
         About
       </h1>
 
-      <p>{pokemon.description}</p>
+      <p className={styles.paragraph}>{pokemon.description}</p>
 
       <div className="flex gap-6">
         <div className="flex flex-col items-center gap-2 justify-end">

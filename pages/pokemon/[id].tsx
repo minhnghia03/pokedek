@@ -3,11 +3,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { ParsedUrlQuery } from 'querystring';
 import { fetchSinglePokemon } from '../../src/api/pokemon';
-import {
-  typeColors,
-  allTypes,
-  calculateEffectiveness
-} from '../../src/api/pokemon_type';
+import { allTypes, calculateEffectiveness } from '../../src/api/pokemon_type';
 import PokemonAbout from '../../src/components/pokemon/PokemonAbout';
 import { IPokemon } from '../../src/types/pokemon';
 import PokemonImage from '../../src/components/pokemon/PokemonImage';
@@ -16,6 +12,7 @@ import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import Link from 'next/link';
 import Spinner from '../../src/components/spinner/Spinner';
 import TypeChart from '../../src/components/pokemon/TypeChart';
+import styles from '../../styles/PokemonDetail.module.css';
 
 type Props = {
   pokemon: IPokemon;
@@ -52,12 +49,12 @@ const PokemonDetailPage = ({
         <title>{pokemon.name}</title>
       </Head>
       <div className="flex flex-col gap-4 py-4">
-        <div className="relative">
+        <div className="flex">
           {prevPokemon !== null && (
             <Link href={`/pokemon/${prevPokemon.id}`} passHref>
-              <a className="text-lg flex h-full items-center text-mediumGray hover:text-blue-500 absolute top-0 left-0">
+              <a className={`${styles.link} mr-auto`}>
                 <BsChevronLeft />
-                <h1 className="capitalize">
+                <h1>
                   {prevPokemon.name} #
                   {prevPokemon.id.toString().padStart(3, '0')}
                 </h1>
@@ -67,8 +64,8 @@ const PokemonDetailPage = ({
 
           {nextPokemon !== null && (
             <Link href={`/pokemon/${nextPokemon.id}`} passHref>
-              <a className="text-lg h-full flex items-center text-mediumGray hover:text-blue-500 absolute top-0 right-0">
-                <h1 className="capitalize">
+              <a className={`${styles.link} ml-auto`}>
+                <h1>
                   {nextPokemon.name} #
                   {nextPokemon.id.toString().padStart(3, '0')}
                 </h1>
@@ -78,14 +75,14 @@ const PokemonDetailPage = ({
           )}
         </div>
 
-        <h1 className="text-4xl font-bold capitalize w-full text-center">
+        <h1 className={`${styles.heading} mx-auto`}>
           {pokemon.name}{' '}
           <span className="font-normal text-mediumGray">
             #{pokemon.id.toString().padStart(3, '0')}
           </span>
         </h1>
 
-        <div className="flex flex-col sm:flex-row w-full gap-12">
+        <div className="flex flex-col sm:flex-row w-full gap-4">
           <div className="w-full sm:w-[45%] shrink-0">
             <PokemonImage pokemon={pokemon} />
           </div>

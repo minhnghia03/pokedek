@@ -8,6 +8,7 @@ import {
 } from '../../src/api/pokemon_type';
 import TypeButton from '../../src/components/pokemon/TypeButton';
 import TypeList from '../../src/components/pokemon/TypeList';
+import styles from '../../styles/PokemonDetail.module.css';
 
 type Props = {
   slug: string;
@@ -32,9 +33,7 @@ const TypeDetailPage = ({
 }: Props) => {
   return (
     <div className="w-full flex flex-col gap-4 py-4">
-      <h1 className="text-4xl font-bold capitalize w-full text-center">
-        {slug}
-      </h1>
+      <h1 className={`${styles.heading} mx-auto`}>{slug}</h1>
       <div className="flex flex-col sm:flex-row gap-4">
         <div
           className="flex flex-1 flex-col gap-4 items-center bg-white shadow-md rounded-md px-4 py-2 border-2"
@@ -45,68 +44,72 @@ const TypeDetailPage = ({
         </div>
 
         <div className="flex flex-1 px-4 py-2 gap-4 flex-col bg-white shadow-md rounded-md">
-          <h1
-            className="font-semibold"
-            style={{
-              color: typeColors[slug]
-            }}
-          >
-            Attack pros & cons
-          </h1>
-          <div className="flex flex-col gap-1">
-            <p>
-              <span className="capitalize italic">{slug}</span> moves are
-              super-effective against:
-            </p>
-            <TypeList types={attackPropsAndCons['super effective']} />
+          <div className="flex flex-col gap-2">
+            <h1
+              className={styles.title}
+              style={{
+                color: typeColors[slug]
+              }}
+            >
+              Attack pros & cons
+            </h1>
+            <div className="flex flex-col gap-1">
+              <p>
+                <span className="capitalize italic">{slug}</span> moves are
+                super-effective against:
+              </p>
+              <TypeList types={attackPropsAndCons['super effective']} />
+            </div>
+
+            <div className="flex flex-col gap-1">
+              <p>
+                <span className="capitalize italic">{slug}</span> moves are not
+                very effective against:
+              </p>
+              <TypeList types={attackPropsAndCons['not effective']} />
+            </div>
+
+            <div className="flex flex-col gap-1">
+              <p>
+                <span className="capitalize italic">{slug}</span> moves have no
+                effect on:
+              </p>
+              <TypeList types={attackPropsAndCons['no effect']} />
+            </div>
           </div>
 
-          <div className="flex flex-col gap-1">
-            <p>
-              <span className="capitalize italic">{slug}</span> moves are not
-              very effective against:
-            </p>
-            <TypeList types={attackPropsAndCons['not effective']} />
-          </div>
+          <div className="flex flex-col gap-2">
+            <h1
+              className={styles.title}
+              style={{
+                color: typeColors[slug]
+              }}
+            >
+              Defense pros & cons
+            </h1>
+            <div className="flex flex-col gap-1">
+              <p>
+                These types are super-effective against{' '}
+                <span className="capitalize italic">{slug}</span> Pokémon:
+              </p>
+              <TypeList types={defensePropsAndCons['super effective']} />
+            </div>
 
-          <div className="flex flex-col gap-1">
-            <p>
-              <span className="capitalize italic">{slug}</span> moves have no
-              effect on:
-            </p>
-            <TypeList types={attackPropsAndCons['no effect']} />
-          </div>
+            <div className="flex flex-col gap-1">
+              <p>
+                These types are not very effective against
+                <span className="capitalize italic">{slug}</span> Pokémon:
+              </p>
+              <TypeList types={defensePropsAndCons['not effective']} />
+            </div>
 
-          <h1
-            className="font-semibold"
-            style={{
-              color: typeColors[slug]
-            }}
-          >
-            Defense pros & cons
-          </h1>
-          <div className="flex flex-col gap-1">
-            <p>
-              These types are super-effective against{' '}
-              <span className="capitalize italic">{slug}</span> Pokémon:
-            </p>
-            <TypeList types={defensePropsAndCons['super effective']} />
-          </div>
-
-          <div className="flex flex-col gap-1">
-            <p>
-              These types are not very effective against
-              <span className="capitalize italic">{slug}</span> Pokémon:
-            </p>
-            <TypeList types={defensePropsAndCons['not effective']} />
-          </div>
-
-          <div className="flex flex-col gap-1">
-            <p>
-              These types have no effect on{' '}
-              <span className="capitalize italic">{slug}</span> Pokémon:
-            </p>
-            <TypeList types={defensePropsAndCons['no effect']} />
+            <div className="flex flex-col gap-1">
+              <p>
+                These types have no effect on{' '}
+                <span className="capitalize italic">{slug}</span> Pokémon:
+              </p>
+              <TypeList types={defensePropsAndCons['no effect']} />
+            </div>
           </div>
         </div>
       </div>

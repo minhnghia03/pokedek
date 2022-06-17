@@ -1,5 +1,6 @@
 import { IPokemon } from '../../types/pokemon';
 import { statAcronym } from '../../api/pokemon';
+import styles from '../../../styles/PokemonDetail.module.css';
 
 type Props = {
   pokemon: IPokemon;
@@ -7,8 +8,8 @@ type Props = {
 
 const PokemonStat = ({ pokemon }: Props) => {
   return (
-    <div className="flex flex-col items-center gap-4">
-      <h1 className="font-semibold" style={{ color: pokemon.color }}>
+    <div className="flex flex-col items-center gap-2">
+      <h1 className={styles.title} style={{ color: pokemon.color }}>
         Base Stats
       </h1>
       <table className="w-full">

@@ -12,7 +12,7 @@ const Layout = ({ children }: Props) => {
         <title>Poké</title>
       </Head>
       <div>
-        <header className="fixed top-0 h-14 bg-white w-full shadow-sm z-50">
+        <header className="fixed top-0 h-14 bg-white w-full shadow-sm z-10">
           <Navbar />
         </header>
         <main className="mt-14 container-lg">{children}</main>

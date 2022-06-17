@@ -2,6 +2,7 @@ import React from 'react';
 import { IPokemon } from '../../types/pokemon';
 import { typeColors } from '../../api/pokemon_type';
 import Link from 'next/link';
+import styles from '../../../styles/PokemonDetail.module.css';
 
 type Props = {
   pokemon: IPokemon;
@@ -13,7 +14,7 @@ type Props = {
 const TypeChart = ({ pokemon, typeEff }: Props) => {
   return (
     <div className="bg-white rounded-md shadow-md px-4 py-2 flex flex-col gap-2">
-      <h1 className="font-semibold" style={{ color: pokemon.color }}>
+      <h1 className={styles.title} style={{ color: pokemon.color }}>
         Type Defenses
       </h1>
       <p>
