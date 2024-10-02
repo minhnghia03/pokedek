@@ -19,7 +19,7 @@ const parsePokemonData = (data: any): IPokemon => {
         id: stat.pokemon_v2_stat.id
       }
     })),
-    sprite: `/pokemons/${data.id}.png`,
+    sprite: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${data.id}.png`,
     description:
       data.pokemon_v2_pokemonspecy.pokemon_v2_pokemonspeciesflavortexts[0]
         .flavor_text,
@@ -108,7 +108,7 @@ export const fetchPokemons = async ({
     query MyQuery {
       pokemon_v2_pokemon(limit: ${POKEMONS_PER_PAGE}, offset: ${
     page * POKEMONS_PER_PAGE
-  }, where: {name: {_regex: "^${term.toLowerCase()}"}, id: {_lt: 1000}}, order_by: {${sort}: ${order}}) {
+  }, where: {name: {_regex: "^${term.toLowerCase()}"}, id: {_lt: 2000}}, order_by: {${sort}: ${order}}) {
         id
         height
         weight
